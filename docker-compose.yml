@@ -1,0 +1,24 @@
+services:
+  mysql:
+    container_name: mysql_10
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: taller_10
+      MYSQL_USER: user10
+      MYSQL_PASSWORD: pass10
+    ports:
+      - "3226:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - express_sql2_network
+
+volumes:
+  mysql_data:
+
+networks:
+  express_sql2_network:
+    driver: bridge
